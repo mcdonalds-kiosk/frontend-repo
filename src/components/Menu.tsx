@@ -7,6 +7,7 @@ import { category } from '../utility/category';
 export default function Menu() {
   const [menuAll, setMenuAll] = useState<MenuItem[] | undefined>();
   const [selectIdx, setSelectIdx] = useState<number>(1);
+  const [selectMenuName, setSelectMenuName] = useState<string>('버거&세트');
   const { cart, setCart } = useContext(CartContext);
 
   useEffect(() => {
@@ -17,9 +18,14 @@ export default function Menu() {
     fetchData();
   }, []);
 
+  const clickCategory = (idx: number) => {
+    const selectMenu = category?.find((c) => c.idx === idx);
+    setSelectIdx(idx);
+    selectMenu && setSelectMenuName(selectMenu.name);
+  };
+
   const clickMenu = (idx: number) => {
     const selectMenu = menuAll?.find((menu) => menu.idx === idx);
-    console.log(selectMenu);
     if (selectMenu) {
       const existingItemIndex = cart.findIndex(
         (m) => m.name === selectMenu?.name,
@@ -53,7 +59,7 @@ export default function Menu() {
               <button
                 key={item.idx}
                 className='border border-2 rounded-md w-25 mb-3 w-24 p-1 text-center'
-                onClick={() => setSelectIdx(item.idx)}
+                onClick={() => clickCategory(item.idx)}
               >
                 <div className='flex justify-center'>
                   <img src={`${item.img_url}`} className='w-20' />
@@ -64,7 +70,7 @@ export default function Menu() {
           </div>
         </div>
         <div>
-          <h1 className='text-2xl font-bold mt-3 mb-4'>추천메뉴</h1>
+          <h1 className='text-2xl font-bold mt-3 mb-4'>{selectMenuName}</h1>
           <div className='grid grid-cols-3'>
             {menuAll &&
               menuAll.map(
