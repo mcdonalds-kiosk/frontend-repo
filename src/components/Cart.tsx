@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
   const navigate = useNavigate();
-  const [totalPrice, setTotalPrice] = useState<number | undefined>();
-  const [totalCount, setToalCount] = useState<number | undefined>();
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalCount, setToalCount] = useState<number>(0);
   const { cart, setCart } = useContext(CartContext);
   const deleteAll = () => {
     setCart([]);

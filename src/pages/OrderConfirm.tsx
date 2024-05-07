@@ -6,8 +6,8 @@ import { Cart } from '../utility/types';
 export default function OrderConfirm() {
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
-  const [totalPrice, setTotalPrice] = useState<number | undefined>();
-  const [totalCount, setToalCount] = useState<number | undefined>();
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalCount, setToalCount] = useState<number>(0);
 
   useEffect(() => {
     let price = 0;
