@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getData } from '../api/api';
+import { getData, postData } from '../api/api';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Order } from '../utility/types';
 
 export default function Success() {
   const navigate = useNavigate();
@@ -19,6 +20,20 @@ export default function Success() {
       if (result && result.status === 'DONE') {
         setStatus(result.status);
         setOrderIdx(result.orderId);
+        if (amount !== null && orderId !== null) {
+          const orderData = await postData<Order>(
+            `/payments/toss/success/order`,
+            {
+              menuCount: 1,
+              totalPrice: +amount,
+              status: 'DONE',
+              memberIdx: 1,
+              purchaseIdx: orderId,
+            },
+          );
+          if (orderData && orderData.status === '200')
+            setOrderIdx(orderData.orderIdx);
+        }
       }
     };
     fetchData();
