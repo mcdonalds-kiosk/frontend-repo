@@ -1,6 +1,5 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
+import { Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
 import Join from './pages/Join';
 import Order from './pages/Order';
 import OrderConfirm from './pages/OrderConfirm';
@@ -23,4 +22,3 @@ function App() {
 }
 
 export default App;
-
