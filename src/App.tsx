@@ -7,12 +7,14 @@ import { CartContext } from './context/CartContext';
 import { useState } from 'react';
 import { Cart } from './utility/types';
 import Success from './pages/Success';
+import Home from './pages/Home';
 
 function App() {
   const [cart, setCart] = useState<Cart[]>([]);
   return (
     <CartContext.Provider value={{ cart, setCart }}>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/join' element={<Join />} />
         <Route path='/order' element={<Order />}></Route>

@@ -20,18 +20,15 @@ function Login() {
     if (result.status === true) {
       localStorage.setItem('idx', result.idx);
       localStorage.setItem('name', result.name);
-      welcomePage();
+      alert('어서오세요!');
+      navigate('/order');
     }
   };
 
-  const welcomePage = () => {
-    alert('어서오세요!');
+  const unknownLogin = async () => {
+    localStorage.setItem('idx', '1');
+    localStorage.setItem('name', '비회원');
     navigate('/order');
-  };
-
-  const cancel = () => {
-    setId('');
-    setPw('');
   };
 
   return (
@@ -49,7 +46,7 @@ function Login() {
             }}
           >
             <img
-              src='https://seeklogo.com/images/M/mcdonalds-green-logo-78D1E0747C-seeklogo.com.png'
+              src='https://i.namu.wiki/i/oi9sBDTuutRiAra4ITI7MDfyMmlmxY9Hj6fKsrjksNXdnsqxUuzsuq5C5eyEakUt_lgDJH-4k51fdUop_GL5cEupszNAF9R63BFLC1eCNVwCqVMLtKovMFLBv50sq8CMrEitU_TKbDBny9ti5cmvIw.svg'
               style={{ width: '70px', height: 'auto', marginRight: '20px' }}
             />
             <h1 className='text-white'>로그인 해주세요</h1>
@@ -94,7 +91,7 @@ function Login() {
             <button
               type='button'
               className='py-2 px-6 bg-red-600 text-white font-semibold rounded-lg'
-              onClick={cancel}
+              onClick={() => navigate('/')}
             >
               취소
             </button>
@@ -112,7 +109,7 @@ function Login() {
               type='button'
               style={{ marginLeft: '50px' }}
               className='py-2 px-10 bg-green-600 text-white font-semibold rounded-lg'
-              onClick={welcomePage}
+              onClick={unknownLogin}
             >
               비회원 입장
             </button>
