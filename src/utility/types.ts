@@ -28,3 +28,8 @@ export interface Order {
   memberIdx: number;
   purchaseIdx: string;
 }
+
+export interface RequestPayment {
+  orderId: string;
+  status: string;
+}

@@ -6,7 +6,7 @@ export const getData = async (url: string) => {
   }).then((response) => response.json());
 };
 
-export const postData = async <T>(url: string, body: T) => {
+export const postData = async <T>(url: string, body: T): Promise<any> => {
   return await fetch(`${BASE_URL}${url}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

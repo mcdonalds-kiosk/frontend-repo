@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import { Cart } from '../utility/types';
+import { Cart, RequestPayment } from '../utility/types';
 import { postData } from '../api/api';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 
@@ -33,12 +33,12 @@ export default function OrderConfirm() {
   const payment = async () => {
     const memberIdx = localStorage.getItem('idx');
 
-    const requestPayments = await postData('/payments/toss', {
+    const requestPayments: RequestPayment = await postData('/payments/toss', {
       memberIdx: memberIdx,
       payType: 'card',
       amount: totalPrice,
     });
-    if (
+    if (requestPayments &&
       requestPayments.orderId !== null &&
       clientKey !== null &&
       memberIdx !== null
