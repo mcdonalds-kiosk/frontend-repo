@@ -11,5 +11,5 @@ export const postData = async <T>(url: string, body: T) => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
-  }).then((response) => response.json());
+  }).then((response) => { if (response) response.json() });
 };
