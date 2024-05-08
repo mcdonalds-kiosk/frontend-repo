@@ -17,7 +17,7 @@ export interface MenuItem {
   name: string;
   imageUrl: string;
   price: number;
-  categoryIdx: number;
+  category: number;
   updatedAt: string;
 }
 

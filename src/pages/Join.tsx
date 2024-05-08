@@ -139,7 +139,7 @@ function Join() {
               >
                 취소
               </button>
-              <div style={{ width: '20px' }}></div> {/* 간격 */}
+              <div style={{ width: '20px' }}></div>
               <button
                 type='button'
                 className='py-2 px-12 bg-green-600 text-white font-semibold rounded-lg'

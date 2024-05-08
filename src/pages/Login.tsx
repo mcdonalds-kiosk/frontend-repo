@@ -29,10 +29,6 @@ function Login() {
     navigate('/order');
   };
 
-  const joinPage = () => {
-    navigate('/join');
-  };
-
   const cancel = () => {
     setId('');
     setPw('');
@@ -126,7 +122,7 @@ function Login() {
               type='button'
               style={{ marginLeft: '58px' }}
               className='py-2 px-10 bg-red-600 text-white font-semibold rounded-lg'
-              onClick={joinPage}
+              onClick={() => navigate('/join')}
             >
               회원 가입
             </button>
