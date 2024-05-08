@@ -47,13 +47,6 @@ function Join() {
     }
   };
 
-  const cancel = () => {
-    setId('');
-    setPw('');
-    setEmail('');
-    setName('');
-  };
-
   return (
     <>
       <div
@@ -69,7 +62,7 @@ function Join() {
             }}
           >
             <img
-              src='https://seeklogo.com/images/M/mcdonalds-green-logo-78D1E0747C-seeklogo.com.png'
+              src='https://i.namu.wiki/i/oi9sBDTuutRiAra4ITI7MDfyMmlmxY9Hj6fKsrjksNXdnsqxUuzsuq5C5eyEakUt_lgDJH-4k51fdUop_GL5cEupszNAF9R63BFLC1eCNVwCqVMLtKovMFLBv50sq8CMrEitU_TKbDBny9ti5cmvIw.svg'
               style={{ width: '70px', height: 'auto', marginRight: '20px' }}
             />
             <h1 className='text-white'>회원가입 해주세요</h1>
@@ -135,11 +128,11 @@ function Join() {
               <button
                 type='button'
                 className='py-2 px-6 bg-red-600 text-white font-semibold rounded-lg'
-                onClick={cancel}
+                onClick={() => navigate('/login')}
               >
                 취소
               </button>
-              <div style={{ width: '20px' }}></div> {/* 간격 */}
+              <div style={{ width: '20px' }}></div>
               <button
                 type='button'
                 className='py-2 px-12 bg-green-600 text-white font-semibold rounded-lg'

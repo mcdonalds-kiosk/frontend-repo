@@ -31,19 +31,25 @@ export default function OrderConfirm() {
   };
 
   const payment = async () => {
+    const memberIdx = localStorage.getItem('idx');
+
     const requestPayments = await postData('/payments/toss', {
-      memberIdx: 1,
+      memberIdx: memberIdx,
       payType: 'card',
       amount: totalPrice,
     });
-    if (requestPayments.orderId !== null && clientKey !== null) {
+    if (
+      requestPayments.orderId !== null &&
+      clientKey !== null &&
+      memberIdx !== null
+    ) {
       loadTossPayments(clientKey).then((tossPayments) => {
         tossPayments
           .requestPayment('카드', {
             amount: totalPrice,
             orderName: menuName,
             orderId: requestPayments.orderId,
-            customerName: '1',
+            customerName: memberIdx,
             successUrl: 'http://localhost:3000/success',
             failUrl: 'http://localhost:3000/fail',
           })

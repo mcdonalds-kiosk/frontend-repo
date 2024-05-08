@@ -75,7 +75,7 @@ export default function Menu() {
             {menuAll &&
               menuAll.map(
                 (m) =>
-                  m.categoryIdx === selectIdx && (
+                  m.category === selectIdx && (
                     <button
                       key={m.idx}
                       className='w-36 m-2'
