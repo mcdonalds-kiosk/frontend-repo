@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getData } from '../api/api';
 
 function Login() {
   const navigate = useNavigate();
@@ -14,9 +15,13 @@ function Login() {
     setPw(event.target.value);
   };
 
-  const login = () => {
-    console.log(id, pw);
-    // 로그인 처리 로직
+  const login = async () => {
+    const result = await getData(`/members/login?id=${id}&pw=${pw}`);
+    if (result.status === true) {
+      localStorage.setItem('idx', result.idx);
+      localStorage.setItem('name', result.name);
+      welcomePage();
+    }
   };
 
   const welcomePage = () => {
