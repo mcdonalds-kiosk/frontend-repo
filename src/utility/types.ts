@@ -20,3 +20,11 @@ export interface MenuItem {
   categoryIdx: number;
   updatedAt: string;
 }
+
+export interface Order {
+  menuCount: number;
+  totalPrice: number;
+  status: string;
+  memberIdx: number;
+  purchaseIdx: string;
+}

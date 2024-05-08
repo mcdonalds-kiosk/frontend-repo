@@ -2,12 +2,16 @@ import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { Cart } from '../utility/types';
+import { postData } from '../api/api';
+import { loadTossPayments } from '@tosspayments/payment-sdk';
 
 export default function OrderConfirm() {
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
+  const [menuName, setMenuName] = useState<string>('');
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [totalCount, setToalCount] = useState<number>(0);
+  const clientKey = import.meta.env.VITE_APP_CLIENT_KEY;
 
   useEffect(() => {
     let price = 0;
@@ -18,10 +22,36 @@ export default function OrderConfirm() {
     });
     setToalCount(cnt);
     setTotalPrice(price);
+    if (cnt <= 1) setMenuName(`${cart[0].name}`);
+    else setMenuName(`${cart[0].name}외 ${cnt - 1}개`);
   }, [cart]);
 
   const goToBack = () => {
     navigate(-1);
+  };
+
+  const payment = async () => {
+    const requestPayments = await postData('/payments/toss', {
+      memberIdx: 1,
+      payType: 'card',
+      amount: totalPrice,
+    });
+    if (requestPayments.orderId !== null && clientKey !== null) {
+      loadTossPayments(clientKey).then((tossPayments) => {
+        tossPayments
+          .requestPayment('카드', {
+            amount: totalPrice,
+            orderName: menuName,
+            orderId: requestPayments.orderId,
+            customerName: '1',
+            successUrl: 'http://localhost:3000/success',
+            failUrl: 'http://localhost:3000/fail',
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+    }
   };
 
   return (
@@ -48,7 +78,9 @@ export default function OrderConfirm() {
           <button className='btn-danger w-full' onClick={goToBack}>
             추가주문
           </button>
-          <button className='btn-primary w-full'>결제하기</button>
+          <button className='btn-primary w-full' onClick={payment}>
+            결제하기
+          </button>
         </div>
       </div>
     </div>
