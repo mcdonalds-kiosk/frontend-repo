@@ -38,6 +38,7 @@ export default function OrderConfirm() {
       payType: 'card',
       amount: totalPrice,
     });
+    console.log(requestPayments);
     if (requestPayments &&
       requestPayments.orderId !== null &&
       clientKey !== null &&

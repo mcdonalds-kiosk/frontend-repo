@@ -30,13 +30,14 @@ function Join() {
     try {
       const isIdDuplicate = await getData('/members/check_dup_id?id=' + id);
       if (isIdDuplicate.status === true) {
-        await postData<JoinMember>('/members/join', {
+        const res = await postData<JoinMember>('/members/join', {
           id: id,
           pw: pw,
           name: name,
           email: email,
           role: 'USER',
         });
+        console.log(res, res.status);
         alert('환영합니다!');
         navigate('/login');
       } else {

@@ -20,8 +20,12 @@ function Login() {
         if (result.status === true) {
             localStorage.setItem('idx', result.idx);
             localStorage.setItem('name', result.name);
-            alert('어서오세요!');
-            navigate('/order');
+
+            if (result.name == '관리자') window.location.href = 'http://localhost:8080/admin/members';
+            else {
+                alert('어서오세요!');
+                navigate('/order');
+            }
         }
         else alert('존재하지 않는 계정입니다!');
     };
